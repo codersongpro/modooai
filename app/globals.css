@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* 색. 모두 흰 바탕 기준 WCAG AA 대비를 넘긴다. */
+:root {
+  color-scheme: light;
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --line: #d9d6cc;
+  --text: #1d2125;
+  --muted: #545b63;
+  --primary: #1f5fae;
+  --primary-strong: #174a89;
+  --primary-soft: #e6eefa;
+  --ai: #0b6b63;
+  --ai-soft: #e3f3f1;
+  --ok: #17703a;
+  --ok-soft: #e4f4ea;
+  --bad: #b3261e;
+  --bad-soft: #fbe9e7;
+  --warn-soft: #fff3cf;
+  --warn-text: #5c4300;
+
+  /* 수준별 기본 글자 크기와 터치 영역. data-level 로 바뀐다. */
+  --base: 18px;
+  --touch: 3rem;
+  --scale: 1;
+}
+
+html[data-level="L1"] { --base: 20px; }
+html[data-level="L2"] { --base: 18px; }
+html[data-level="L3"] { --base: 16px; }
+html[data-level="L4"] { --base: 20px; }
+
+/* 글자 크기 3단계 */
+html[data-scale="1"] { --scale: 1.15; }
+html[data-scale="2"] { --scale: 1.3; }
+
+/* 모든 rem 크기가 이 값을 따라 커진다 */
+html {
+  font-size: calc(var(--base) * var(--scale));
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-ai: var(--ai);
+  --color-ai-soft: var(--ai-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-text: var(--warn-text);
+  --font-sans: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  /* 터치 영역: L1~L3 48px 이상, L4 56px 이상 */
+  --spacing-touch: max(48px, var(--touch));
+}
+
+html[data-level="L4"] {
+  --touch: 56px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* 키보드로 움직일 때 잘 보이는 테두리 */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
